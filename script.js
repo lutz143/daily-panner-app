@@ -2,7 +2,11 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-const today = dayjs().format('MM/DD/YYYY');
+// capture relevant elements for future rendering
+var currentTimeEl = $("#currentDay");
+
+
+const today = dayjs().format('dddd, MMMM D, YYYY');
 const testTime = dayjs('2022-11-16T20:00:00');
 const testTime2 = dayjs('2022-11-16T22:00:00');
 const timeNow = dayjs().format('MM/DD/YYYY HH:mm A');
@@ -12,6 +16,14 @@ console.log(testTime);
 console.log(dayjs().isAfter(testTime));
 console.log(dayjs().isAfter(testTime2));
 
+
+// create function to render current time at top of the page
+function displayTimeNow(){
+  console.log(currentTimeEl);
+  currentTimeEl.text(today);
+}
+
+displayTimeNow();
 
 function handleFormSubmit(event) {
   event.preventDefault();
