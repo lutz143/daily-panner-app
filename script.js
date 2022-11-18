@@ -4,6 +4,9 @@
 
 // capture relevant elements for future rendering
 var currentTimeEl = $("#currentDay");
+let workMilitaryStart = 7;
+let workMilitaryEnd = 18;
+
 
 
 const today = dayjs().format('dddd, MMMM D, YYYY');
@@ -16,6 +19,25 @@ console.log(testTime);
 console.log(dayjs().isAfter(testTime));
 console.log(dayjs().isAfter(testTime2));
 
+function workHours() {
+  var workStart = dayjs().hour(workMilitaryStart).minute(0).second(0);
+  var workEnd = dayjs().hour(workMilitaryEnd).minute(0).second(0);
+  
+  var workHours = workEnd.diff(workStart, 'hours');
+  workHour = [workMilitaryStart];
+  console.log(workStart);
+  console.log(workEnd);  
+
+  for(var i=0; i < workHours; i++) {
+    workHour++;
+    workHourFormat = dayjs().hour(workHour).minute(0).second(0);
+    console.log(workHourFormat.format('ha'));   
+    
+  }
+}
+
+
+
 
 // create function to render current time at top of the page
 function displayTimeNow(){
@@ -23,7 +45,7 @@ function displayTimeNow(){
   currentTimeEl.text(today);
 }
 
-displayTimeNow();
+
 
 function handleFormSubmit(event) {
   event.preventDefault();
@@ -49,3 +71,7 @@ function handleFormSubmit(event) {
     // TODO: Add code to display the current date in the header of the page.
   });
 }
+
+
+displayTimeNow();
+workHours();
