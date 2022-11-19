@@ -4,6 +4,7 @@
 
 // capture relevant elements for future rendering
 var currentTimeEl = $("#currentDay");
+var hourContainerEl = $("#time-container");
 let workMilitaryStart = 7;
 let workMilitaryEnd = 18;
 
@@ -19,31 +20,47 @@ console.log(testTime);
 console.log(dayjs().isAfter(testTime));
 console.log(dayjs().isAfter(testTime2));
 
+// create function to render current time at top of the page
+function displayTimeNow(){
+  console.log(currentTimeEl);
+  currentTimeEl.text(today);
+
+  hourContainerEl.append()
+}
+
+
 function workHours() {
   var workStart = dayjs().hour(workMilitaryStart).minute(0).second(0);
   var workEnd = dayjs().hour(workMilitaryEnd).minute(0).second(0);
   
   var workHours = workEnd.diff(workStart, 'hours');
-  workHour = [workMilitaryStart];
+  workHour = [workMilitaryStart-1];
   console.log(workStart);
   console.log(workEnd);  
 
   for(var i=0; i < workHours; i++) {
     workHour++;
     workHourFormat = dayjs().hour(workHour).minute(0).second(0);
-    console.log(workHourFormat.format('ha'));   
+    workHourFormat = workHourFormat.format('ha');
+    console.log(workHourFormat);
+
+    var timeNode = document.createElement('div');
+    var textAreaEl = document.createElement('textarea');
+    var saveBtn = document.createElement('button');
+
+    
+    timeNode.setAttribute('id', 'hour-9');
+    timeNode.setAttribute('value', workHourFormat);
+
+    timeNode.textContent = workHourFormat;
+
+    hourContainerEl.append(timeNode);
+    
+    // hourContainerEl.children().text(workHourFormat);
     
   }
 }
 
-
-
-
-// create function to render current time at top of the page
-function displayTimeNow(){
-  console.log(currentTimeEl);
-  currentTimeEl.text(today);
-}
 
 
 
