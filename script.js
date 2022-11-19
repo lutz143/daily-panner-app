@@ -48,13 +48,21 @@ function workHours() {
     var textAreaEl = document.createElement('textarea');
     var saveBtn = document.createElement('button');
 
-    
+
     timeNode.setAttribute('id', 'hour-9');
     timeNode.setAttribute('value', workHourFormat);
 
+    textAreaEl.setAttribute('class', 'col-8 col-md-10 description');
+    textAreaEl
+    saveBtn.setAttribute('class', 'btn saveBtn col-2 col-md-1');
+    saveBtn.setAttribute('aria-label', 'save');
+
     timeNode.textContent = workHourFormat;
+    
 
     hourContainerEl.append(timeNode);
+    hourContainerEl.append(textAreaEl);
+    hourContainerEl.append(saveBtn);
     
     // hourContainerEl.children().text(workHourFormat);
     
