@@ -82,12 +82,26 @@ function workHours() {
   }
 }
 
+
 $(document).ready(function() {
-  $(".saveBtn").on("click", function(){
+  $(".saveBtn").on("click", function(event){
+    event.preventDefault();
     console.log("button clicked!");
     var task = $(this).siblings('#taskDescription').val();
     var taskHour = $(this).siblings('#taskHour').html();
-    console.log(taskHour + ": " + task);    
+    console.log(taskHour + ": " + task);
+
+    // taskLog = [];
+
+    var taskLog = JSON.parse(window.localStorage.getItem('taskLog')) || [];
+    var newTask = {
+      taskHour: taskHour,
+      task: task,
+    };
+
+    // save to local storage
+    taskLog.push(newTask);
+    window.localStorage.setItem('taskLog', JSON.stringify(taskLog));
   })
 })
 
@@ -117,6 +131,6 @@ function handleFormSubmit(event) {
   });
 }
 
-
+// handleFormSubmit();
 displayTimeNow();
 workHours();
