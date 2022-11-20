@@ -52,12 +52,12 @@ function workHours() {
     var saveBtn = document.createElement('button');
     var iEl = document.createElement('i');
 
-    if (dayjs().isAfter(workHourFormat)) {
+    if (dayjs().hour() > (workCurrentHour)) {
       timeNodeEl.setAttribute('class', 'row time-block past');
     } else if (dayjs().hour() == workCurrentHour) {
-      timeNodeEl.setAttribute('class', 'row time-block present');      
+      timeNodeEl.setAttribute('class', 'row time-block present');
     } else {
-      timeNodeEl.setAttribute('class', 'row time-block future');      
+      timeNodeEl.setAttribute('class', 'row time-block future');
     }
 
     timeNodeEl.setAttribute('id', 'currentHour');
@@ -80,8 +80,6 @@ function workHours() {
   }
 }
 
-function hourPast() {
-}
 
 
 function handleFormSubmit(event) {
@@ -112,4 +110,3 @@ function handleFormSubmit(event) {
 
 displayTimeNow();
 workHours();
-hourPast();
