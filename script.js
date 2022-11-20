@@ -43,19 +43,25 @@ function workHours() {
   for(var i=0; i < workHours; i++) {
     workHour++;
     var workHourFormat = dayjs().hour(workHour).minute(0).second(0);
+    var workCurrentHour = workHourFormat.format('H');
     var workHourFormat = workHourFormat.format('ha');
-    console.log(workHourFormat);
 
-    // var workHourDisplay = workHourFormat[i];
-    // console.log('Test: ' + workHourDisplay);
     var timeNodeEl = document.createElement('div');
     var timeNode = document.createElement('div');
     var textAreaEl = document.createElement('textarea');
     var saveBtn = document.createElement('button');
     var iEl = document.createElement('i');
 
+    if (dayjs().isAfter(workHourFormat)) {
+      timeNodeEl.setAttribute('class', 'row time-block past');
+    } else if (dayjs().hour() == workCurrentHour) {
+      timeNodeEl.setAttribute('class', 'row time-block present');      
+    } else {
+      timeNodeEl.setAttribute('class', 'row time-block future');      
+    }
+
     timeNodeEl.setAttribute('id', 'currentHour');
-    timeNodeEl.setAttribute('class', 'row time-block past');
+    // timeNodeEl.setAttribute('class', 'row time-block');
     timeNode.setAttribute('class', 'col-2 col-md-1 hour text-center py-3');
     textAreaEl.setAttribute('class', 'col-8 col-md-10 description');
     textAreaEl.setAttribute('rows', '3');
@@ -74,7 +80,8 @@ function workHours() {
   }
 }
 
-
+function hourPast() {
+}
 
 
 function handleFormSubmit(event) {
@@ -105,3 +112,4 @@ function handleFormSubmit(event) {
 
 displayTimeNow();
 workHours();
+hourPast();
