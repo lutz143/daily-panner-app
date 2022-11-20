@@ -5,20 +5,22 @@
 // capture relevant elements for future rendering
 var currentTimeEl = $("#currentDay");
 var hourContainerEl = $("#time-container");
+var timeNodeEl = $("#hour-9");
+
 let workMilitaryStart = 7;
 let workMilitaryEnd = 18;
 
-
+console.log(hourContainerEl);
 
 const today = dayjs().format('dddd, MMMM D, YYYY');
 const testTime = dayjs('2022-11-16T20:00:00');
 const testTime2 = dayjs('2022-11-16T22:00:00');
 const timeNow = dayjs().format('MM/DD/YYYY HH:mm A');
-console.log("Today's Date: " + today);
-console.log("Time Now: " + timeNow);
-console.log(testTime);
-console.log(dayjs().isAfter(testTime));
-console.log(dayjs().isAfter(testTime2));
+// console.log("Today's Date: " + today);
+// console.log("Time Now: " + timeNow);
+// console.log(testTime);
+// console.log(dayjs().isAfter(testTime));
+// console.log(dayjs().isAfter(testTime2));
 
 // create function to render current time at top of the page
 function displayTimeNow(){
@@ -40,32 +42,35 @@ function workHours() {
 
   for(var i=0; i < workHours; i++) {
     workHour++;
-    workHourFormat = dayjs().hour(workHour).minute(0).second(0);
-    workHourFormat = workHourFormat.format('ha');
+    var workHourFormat = dayjs().hour(workHour).minute(0).second(0);
+    var workHourFormat = workHourFormat.format('ha');
     console.log(workHourFormat);
 
+    // var workHourDisplay = workHourFormat[i];
+    // console.log('Test: ' + workHourDisplay);
+    var timeNodeEl = document.createElement('div');
     var timeNode = document.createElement('div');
     var textAreaEl = document.createElement('textarea');
     var saveBtn = document.createElement('button');
+    var iEl = document.createElement('i');
 
-
-    timeNode.setAttribute('id', 'hour-9');
-    timeNode.setAttribute('value', workHourFormat);
-
+    timeNodeEl.setAttribute('id', 'currentHour');
+    timeNodeEl.setAttribute('class', 'row time-block past');
+    timeNode.setAttribute('class', 'col-2 col-md-1 hour text-center py-3');
     textAreaEl.setAttribute('class', 'col-8 col-md-10 description');
-    textAreaEl
+    textAreaEl.setAttribute('rows', '3');
     saveBtn.setAttribute('class', 'btn saveBtn col-2 col-md-1');
     saveBtn.setAttribute('aria-label', 'save');
+    iEl.setAttribute('class', 'fas fa-save');
+    iEl.setAttribute('aria-hidden', 'true');
 
     timeNode.textContent = workHourFormat;
-    
 
-    hourContainerEl.append(timeNode);
-    hourContainerEl.append(textAreaEl);
-    hourContainerEl.append(saveBtn);
-    
-    // hourContainerEl.children().text(workHourFormat);
-    
+    hourContainerEl.append(timeNodeEl);
+    timeNodeEl.append(timeNode);
+    timeNodeEl.append(textAreaEl);
+    timeNodeEl.append(saveBtn);
+    saveBtn.append(iEl);   
   }
 }
 
