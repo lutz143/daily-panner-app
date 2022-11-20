@@ -62,7 +62,9 @@ function workHours() {
 
     timeNodeEl.setAttribute('id', 'currentHour');
     // timeNodeEl.setAttribute('class', 'row time-block');
+    timeNode.setAttribute('id', 'taskHour');
     timeNode.setAttribute('class', 'col-2 col-md-1 hour text-center py-3');
+    textAreaEl.setAttribute('id', 'taskDescription');
     textAreaEl.setAttribute('class', 'col-8 col-md-10 description');
     textAreaEl.setAttribute('rows', '3');
     saveBtn.setAttribute('class', 'btn saveBtn col-2 col-md-1');
@@ -80,6 +82,14 @@ function workHours() {
   }
 }
 
+$(document).ready(function() {
+  $(".saveBtn").on("click", function(){
+    console.log("button clicked!");
+    var task = $(this).siblings('#taskDescription').val();
+    var taskHour = $(this).siblings('#taskHour').html();
+    console.log(taskHour + ": " + task);    
+  })
+})
 
 
 function handleFormSubmit(event) {
