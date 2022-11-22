@@ -6,21 +6,16 @@
 var currentTimeEl = $("#currentDay");
 var hourContainerEl = $("#time-container");
 var timeNodeEl = $("#hour-9");
+var taskLog = JSON.parse(window.localStorage.getItem('taskLog')) || [];
+console.log(taskLog);
 
-let workMilitaryStart = 7;
+let workMilitaryStart = 0;
 let workMilitaryEnd = 18;
-
-console.log(hourContainerEl);
 
 const today = dayjs().format('dddd, MMMM D, YYYY');
 const testTime = dayjs('2022-11-16T20:00:00');
 const testTime2 = dayjs('2022-11-16T22:00:00');
 const timeNow = dayjs().format('MM/DD/YYYY HH:mm A');
-// console.log("Today's Date: " + today);
-// console.log("Time Now: " + timeNow);
-// console.log(testTime);
-// console.log(dayjs().isAfter(testTime));
-// console.log(dayjs().isAfter(testTime2));
 
 // create function to render current time at top of the page
 function displayTimeNow(){
@@ -60,8 +55,7 @@ function workHours() {
       timeNodeEl.setAttribute('class', 'row time-block future');
     }
 
-    timeNodeEl.setAttribute('id', 'currentHour');
-    // timeNodeEl.setAttribute('class', 'row time-block');
+    timeNodeEl.setAttribute('id', workHourFormat);
     timeNode.setAttribute('id', 'taskHour');
     timeNode.setAttribute('class', 'col-2 col-md-1 hour text-center py-3');
     textAreaEl.setAttribute('id', 'taskDescription');
@@ -78,33 +72,49 @@ function workHours() {
     timeNodeEl.append(timeNode);
     timeNodeEl.append(textAreaEl);
     timeNodeEl.append(saveBtn);
-    saveBtn.append(iEl);   
+    saveBtn.append(iEl);
+
+    // render text content to the text area from localStorage
+    $('#12am .description').val(localStorage.getItem('12am'));
+    $('#1am .description').val(localStorage.getItem('1am'));
+    $('#2am .description').val(localStorage.getItem('2am'));
+    $('#3am .description').val(localStorage.getItem('3am'));
+    $('#4am .description').val(localStorage.getItem('4am'));
+    $('#5am .description').val(localStorage.getItem('5am'));
+    $('#6am .description').val(localStorage.getItem('6am'));
+    $('#7am .description').val(localStorage.getItem('7am'));
+    $('#8am .description').val(localStorage.getItem('8am'));
+    $('#9am .description').val(localStorage.getItem('9am'));
+    $('#10am .description').val(localStorage.getItem('10am'));
+    $('#11am .description').val(localStorage.getItem('11am'));
+    $('#12pm .description').val(localStorage.getItem('12pm'));
+    $('#1pm .description').val(localStorage.getItem('1pm'));
+    $('#2pm .description').val(localStorage.getItem('2pm'));
+    $('#3pm .description').val(localStorage.getItem('3pm'));
+    $('#4pm .description').val(localStorage.getItem('4pm'));
+    $('#5pm .description').val(localStorage.getItem('5pm'));
+    $('#6pm .description').val(localStorage.getItem('6pm'));
+    $('#7pm .description').val(localStorage.getItem('7pm'));
+    $('#8pm .description').val(localStorage.getItem('8pm'));
+    $('#9pm .description').val(localStorage.getItem('9pm'));
+    $('#10pm .description').val(localStorage.getItem('10pm'));
+    $('#11pm .description').val(localStorage.getItem('11pm'));
   }
 }
-
 
 $(document).ready(function() {
   $(".saveBtn").on("click", function(event){
     event.preventDefault();
-    console.log("button clicked!");
-    var task = $(this).siblings('#taskDescription').val();
+    console.log("button clicked!");    
     var taskHour = $(this).siblings('#taskHour').html();
+    var task = $(this).siblings('#taskDescription').val();
     console.log(taskHour + ": " + task);
 
-    // taskLog = [];
-
-    var taskLog = JSON.parse(window.localStorage.getItem('taskLog')) || [];
-    var newTask = {
-      taskHour: taskHour,
-      task: task,
-    };
-
-    // save to local storage
-    taskLog.push(newTask);
-    window.localStorage.setItem('taskLog', JSON.stringify(taskLog));
+    localStorage.setItem(taskHour, task);    
   })
 })
 
+// localStorage.clear();
 
 function handleFormSubmit(event) {
   event.preventDefault();
@@ -134,3 +144,4 @@ function handleFormSubmit(event) {
 // handleFormSubmit();
 displayTimeNow();
 workHours();
+// displayTasks();
