@@ -114,6 +114,14 @@ $(document).ready(function() {
   })
 })
 
+$(document).ready(function() {
+  $("#clearStorage").on("click", function(){
+    // event.preventDefault();
+    console.log('Clear button clicked!');
+    localStorage.clear();
+    location.reload();
+  })
+})
 // localStorage.clear();
 
 function handleFormSubmit(event) {
@@ -141,7 +149,6 @@ function handleFormSubmit(event) {
   });
 }
 
-// handleFormSubmit();
+
 displayTimeNow();
 workHours();
-// displayTasks();
