@@ -7,7 +7,6 @@ var currentTimeEl = $("#currentDay");
 var hourContainerEl = $("#time-container");
 var timeNodeEl = $("#hour-9");
 var taskLog = JSON.parse(window.localStorage.getItem('taskLog')) || [];
-console.log(taskLog);
 
 let workMilitaryStart = 0;
 let workMilitaryEnd = 18;
@@ -19,7 +18,6 @@ const timeNow = dayjs().format('MM/DD/YYYY HH:mm A');
 
 // create function to render current time at top of the page
 function displayTimeNow(){
-  console.log(currentTimeEl);
   currentTimeEl.text(today);
 
   hourContainerEl.append()
@@ -28,12 +26,9 @@ function displayTimeNow(){
 
 function workHours() {
   var workStart = dayjs().hour(workMilitaryStart).minute(0).second(0);
-  var workEnd = dayjs().hour(workMilitaryEnd).minute(0).second(0);
-  
+  var workEnd = dayjs().hour(workMilitaryEnd).minute(0).second(0);  
   var workHours = workEnd.diff(workStart, 'hours');
   workHour = [workMilitaryStart-1];
-  console.log(workStart);
-  console.log(workEnd);  
 
   for(var i=0; i < workHours; i++) {
     workHour++;
@@ -105,10 +100,8 @@ function workHours() {
 $(document).ready(function() {
   $(".saveBtn").on("click", function(event){
     event.preventDefault();
-    console.log("button clicked!");    
     var taskHour = $(this).siblings('#taskHour').html();
     var task = $(this).siblings('#taskDescription').val();
-    console.log(taskHour + ": " + task);
 
     localStorage.setItem(taskHour, task);    
   })
@@ -116,13 +109,10 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $("#clearStorage").on("click", function(){
-    // event.preventDefault();
-    console.log('Clear button clicked!');
     localStorage.clear();
     location.reload();
   })
 })
-// localStorage.clear();
 
 function handleFormSubmit(event) {
   event.preventDefault();
@@ -148,7 +138,6 @@ function handleFormSubmit(event) {
     // TODO: Add code to display the current date in the header of the page.
   });
 }
-
 
 displayTimeNow();
 workHours();
